@@ -2,7 +2,7 @@
 
 Summary: Tools for managing the osinfo database
 Name: osinfo-db-tools
-Version: 1.0.0
+Version: 1.1.0
 Release: 1%{?dist}
 License: GPLv2+
 Source: https://fedorahosted.org/releases/l/i/libosinfo/%{name}-%{version}.tar.gz
@@ -43,5 +43,8 @@ information about operating systems for use with virtualization
 %{_mandir}/man1/osinfo-db-validate.1*
 
 %changelog
+* Wed Oct 26 2016 Daniel P. Berrange <berrange@redhat.com> - 1.1.0-1
+- Update to 1.1.0 release
+
 * Fri Jul 29 2016 Daniel P. Berrange <berrange@redhat.com> - 1.0.0-1
 - Initial package after split from libosinfo (rhbz #1361594)

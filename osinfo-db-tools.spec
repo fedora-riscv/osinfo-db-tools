@@ -7,6 +7,7 @@ Release: 1%{?dist}
 License: GPLv2+
 Source: https://fedorahosted.org/releases/l/i/libosinfo/%{name}-%{version}.tar.gz
 URL: http://libosinfo.org/
+BuildRequires:  gcc
 BuildRequires: intltool
 BuildRequires: glib2-devel
 BuildRequires: libxml2-devel >= 2.6.0

@@ -2,8 +2,8 @@
 
 Summary: Tools for managing the osinfo database
 Name: osinfo-db-tools
-Version: 1.2.0
-Release: 2%{?dist}
+Version: 1.3.0
+Release: 1%{?dist}
 License: GPLv2+
 Source: https://fedorahosted.org/releases/l/i/libosinfo/%{name}-%{version}.tar.gz
 URL: http://libosinfo.org/
@@ -13,6 +13,7 @@ BuildRequires: glib2-devel
 BuildRequires: libxml2-devel >= 2.6.0
 BuildRequires: libxslt-devel >= 1.0.0
 BuildRequires: libarchive-devel
+BuildRequires: json-glib-devel
 BuildRequires: /usr/bin/pod2man
 
 %description
@@ -44,6 +45,9 @@ information about operating systems for use with virtualization
 %{_mandir}/man1/osinfo-db-validate.1*
 
 %changelog
+* Fri Feb 01 2019 Fabiano Fidêncio <fidencio@redhat.com> - 1.3.0-1
+- Update to 1.3.0 release
+
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 

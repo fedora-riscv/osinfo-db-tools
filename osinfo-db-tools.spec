@@ -2,13 +2,13 @@
 
 Summary: Tools for managing the osinfo database
 Name: osinfo-db-tools
-Version: 1.3.0
+Version: 1.4.0
 Release: 1%{?dist}
 License: GPLv2+
 Source: https://fedorahosted.org/releases/l/i/libosinfo/%{name}-%{version}.tar.gz
 URL: http://libosinfo.org/
 BuildRequires:  gcc
-BuildRequires: intltool
+BuildRequires: gettext-devel
 BuildRequires: glib2-devel
 BuildRequires: libxml2-devel >= 2.6.0
 BuildRequires: libxslt-devel >= 1.0.0
@@ -45,6 +45,9 @@ information about operating systems for use with virtualization
 %{_mandir}/man1/osinfo-db-validate.1*
 
 %changelog
+* Fri Mar 01 2019 Fabiano Fidêncio <fidencio@redhat.com> - 1.4.0-1
+- Update to 1.4.0 release
+
 * Fri Feb 01 2019 Fabiano Fidêncio <fidencio@redhat.com> - 1.3.0-1
 - Update to 1.3.0 release
 

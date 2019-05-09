@@ -3,3 +3,4 @@
 *.rpm
 x86_64/
 *~
+/osinfo-db-tools-1.5.0.tar.gz.asc

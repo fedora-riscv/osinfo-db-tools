@@ -2,10 +2,10 @@
 
 Summary: Tools for managing the osinfo database
 Name: osinfo-db-tools
-Version: 1.4.0
-Release: 2%{?dist}
+Version: 1.5.0
+Release: 1%{?dist}
 License: GPLv2+
-Source: https://fedorahosted.org/releases/l/i/libosinfo/%{name}-%{version}.tar.gz
+Source: https://releases.pagure.io/libosinfo/%{name}-%{version}.tar.gz
 URL: http://libosinfo.org/
 BuildRequires:  gcc
 BuildRequires: gettext-devel
@@ -15,6 +15,9 @@ BuildRequires: libxslt-devel >= 1.0.0
 BuildRequires: libarchive-devel
 BuildRequires: json-glib-devel
 BuildRequires: /usr/bin/pod2man
+BuildRequires: python3
+BuildRequires: python3-pytest
+BuildRequires: python3-requests
 Requires: gvfs
 
 %description
@@ -27,6 +30,13 @@ information about operating systems for use with virtualization
 %build
 %configure
 %__make %{?_smp_mflags} V=1
+
+%check
+if ! make check
+then
+  cat tests/test-suite.log || true
+  exit 1
+fi
 
 %install
 %__make install DESTDIR=%{buildroot}
@@ -46,6 +56,9 @@ information about operating systems for use with virtualization
 %{_mandir}/man1/osinfo-db-validate.1*
 
 %changelog
+* Thu May 09 2019 Fabiano Fidêncio <fidencio@redhat.com> - 1.5.0-1
+- Update to 1.5.0 release
+
 * Thu Apr 11 2019 Fabiano Fidêncio <fidencio@redhat.com> - 1.4.0-2
 - rhbz#1698845: Require GVFS
 

@@ -1,0 +1,36 @@
+From f4f65ea3e895eaab87af049300d2d69ba3d51c9f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fabiano=20Fid=C3=AAncio?= <fidencio@redhat.com>
+Date: Mon, 20 May 2019 14:28:22 +0200
+Subject: [PATCH 3/3] validate: Don't leak "files"
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Error: CLANG_WARNING:
+osinfo-db-tools-1.5.0/tools/osinfo-db-validate.c:319:9: warning:
+Potential leak of memory pointed to by 'files'
+ #        g_printerr("%s\n", error->message);
+ #        ^
+
+Signed-off-by: Fabiano Fidêncio <fidencio@redhat.com>
+Reviewed-by: Cole Robinson <crobinso@redhat.com>
+(cherry picked from commit 7ac63b928df3f445ede81cac0ade0ed6d810c3cb)
+---
+ tools/osinfo-db-validate.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tools/osinfo-db-validate.c b/tools/osinfo-db-validate.c
+index 0e28e1c..7fd87d2 100644
+--- a/tools/osinfo-db-validate.c
++++ b/tools/osinfo-db-validate.c
+@@ -327,6 +327,7 @@ gint main(gint argc, gchar **argv)
+         g_object_unref(schema);
+     if (dir)
+         g_object_unref(dir);
++    g_free(files);
+     g_clear_error(&error);
+     g_option_context_free(context);
+ 
+-- 
+2.21.0
+

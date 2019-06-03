@@ -1,0 +1,43 @@
+From 66cdd50832a99e175079bfb36a321fd9499c6f0e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fabiano=20Fid=C3=AAncio?= <fidencio@redhat.com>
+Date: Wed, 22 May 2019 18:06:28 +0200
+Subject: [PATCH] import: Don't call unlink(NULL) in _import_extract()
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Similarly to the issue fixed by ae52b0fbc, here we're also potentially
+passing NULL to unlink().
+
+Error: FORWARD_NULL (CWE-476):
+osinfo-db-tools-1.5.0/tools/osinfo-db-import.c:332: var_compare_op: Comparing "source_file" to null implies that "source_file" might be null.
+osinfo-db-tools-1.5.0/tools/osinfo-db-import.c:374: var_deref_model: Passing null pointer "source_file" to "unlink", which dereferences it.
+ #  372|           g_object_unref(file);
+ #  373|       if (!file_is_native)
+ #  374|->         unlink(source_file);
+ #  375|       g_free(source_file);
+ #  376|       return ret;
+
+Signed-off-by: Fabiano Fidêncio <fidencio@redhat.com>
+Reviewed-by: Cole Robinson <crobinso@redhat.com>
+(cherry picked from commit 69eb33ad4207c76c0738bfa00b40c97892bab0ad)
+---
+ tools/osinfo-db-import.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/osinfo-db-import.c b/tools/osinfo-db-import.c
+index 11e68ae..675961d 100644
+--- a/tools/osinfo-db-import.c
++++ b/tools/osinfo-db-import.c
+@@ -370,7 +370,7 @@ static int osinfo_db_import_extract(GFile *target,
+     archive_read_free(arc);
+     if (file)
+         g_object_unref(file);
+-    if (!file_is_native)
++    if (!file_is_native && source_file != NULL)
+         unlink(source_file);
+     g_free(source_file);
+     return ret;
+-- 
+2.21.0
+

@@ -3,12 +3,20 @@
 Summary: Tools for managing the osinfo database
 Name: osinfo-db-tools
 Version: 1.5.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+
 Source: https://releases.pagure.io/libosinfo/%{name}-%{version}.tar.gz
 URL: http://libosinfo.org/
+
+### Patches ###
+Patch0001: 0001-import-Don-t-call-unlink-NULL.patch
+Patch0002: 0002-export-Remove-unused-variable.patch
+Patch0003: 0003-validate-Don-t-leak-files.patch
+Patch0004: 0004-import-Don-t-call-unlink-NULL-in-_import_extract.patch
+
 BuildRequires:  gcc
 BuildRequires: gettext-devel
+BuildRequires: git
 BuildRequires: glib2-devel
 BuildRequires: libxml2-devel >= 2.6.0
 BuildRequires: libxslt-devel >= 1.0.0
@@ -25,7 +33,7 @@ This package provides tools for managing the osinfo database of
 information about operating systems for use with virtualization
 
 %prep
-%setup -q
+%autosetup -S git
 
 %build
 %configure
@@ -56,6 +64,9 @@ fi
 %{_mandir}/man1/osinfo-db-validate.1*
 
 %changelog
+* Mon Jun 03 2019 Fabiano Fidêncio <fidencio@redhat.com> -1.5.0-2
+- Fix coverity issues
+
 * Thu May 09 2019 Fabiano Fidêncio <fidencio@redhat.com> - 1.5.0-1
 - Update to 1.5.0 release
 

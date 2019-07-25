@@ -3,7 +3,7 @@
 Summary: Tools for managing the osinfo database
 Name: osinfo-db-tools
 Version: 1.5.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2+
 Source: https://releases.pagure.io/libosinfo/%{name}-%{version}.tar.gz
 URL: http://libosinfo.org/
@@ -64,6 +64,9 @@ fi
 %{_mandir}/man1/osinfo-db-validate.1*
 
 %changelog
+* Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.5.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Mon Jun 03 2019 Fabiano Fidêncio <fidencio@redhat.com> -1.5.0-2
 - Fix coverity issues
 

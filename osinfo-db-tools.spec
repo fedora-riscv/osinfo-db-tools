@@ -2,15 +2,16 @@
 
 Summary: Tools for managing the osinfo database
 Name: osinfo-db-tools
-Version: 1.6.0
+Version: 1.7.0
 Release: 1%{?dist}
 License: GPLv2+
-Source: https://releases.pagure.io/libosinfo/%{name}-%{version}.tar.gz
+Source: https://releases.pagure.io/libosinfo/%{name}-%{version}.tar.xz
 URL: http://libosinfo.org/
 
 ### Patches ###
 
-BuildRequires:  gcc
+BuildRequires: meson
+BuildRequires: gcc
 BuildRequires: gettext-devel
 BuildRequires: git
 BuildRequires: glib2-devel
@@ -32,23 +33,19 @@ information about operating systems for use with virtualization
 %autosetup -S git
 
 %build
-%configure
-%__make %{?_smp_mflags} V=1
+%meson
+%meson_build
 
 %check
-if ! make check
-then
-  cat tests/test-suite.log || true
-  exit 1
-fi
+%meson_test
 
 %install
-%__make install DESTDIR=%{buildroot}
+%meson_install
 
 %find_lang %{name}
 
 %files -f %{name}.lang
-%doc AUTHORS ChangeLog NEWS README
+%doc NEWS README
 %license COPYING
 %{_bindir}/osinfo-db-export
 %{_bindir}/osinfo-db-import
@@ -60,6 +57,9 @@ fi
 %{_mandir}/man1/osinfo-db-validate.1*
 
 %changelog
+* Fri Nov 29 2019 Fabiano Fidêncio <fidencio@redhat.com> - 1.7.0-1
+- Update to 1.7.0 release
+
 * Fri Jul 26 2019 Fabiano Fidêncio <fidencio@redhat.com> - 1.6.0-1
 - Update to 1.6.0 release
 

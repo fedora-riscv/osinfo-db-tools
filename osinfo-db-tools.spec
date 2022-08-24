@@ -8,7 +8,7 @@
 Summary: Tools for managing the osinfo database
 Name: osinfo-db-tools
 Version: 1.10.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: GPLv2+
 Source: https://releases.pagure.org/libosinfo/%{name}-%{version}.tar.xz
 URL: https://libosinfo.org
@@ -19,7 +19,11 @@ BuildRequires: git
 BuildRequires: glib2-devel
 BuildRequires: libxml2-devel >= 2.6.0
 BuildRequires: libxslt-devel >= 1.0.0
+%if 0%{?fedora} > 36 || 0%{?rhel} > 9
+BuildRequires: libsoup3-devel
+%else
 BuildRequires: libsoup-devel
+%endif
 BuildRequires: libarchive-devel
 BuildRequires: json-glib-devel
 BuildRequires: /usr/bin/pod2man
@@ -140,6 +144,9 @@ rm -rf $RPM_BUILD_ROOT%{mingw64_datadir}/man
 %endif
 
 %changelog
+* Wed Aug 24 2022 Daniel P. Berrangé <berrange@redhat.com> - 1.10.0-5
+- Switch to soup3
+
 * Mon Aug  8 2022 Daniel P. Berrangé <berrange@redhat.com> - 1.10.0-4
 - Pull in mingw sub-packages
 

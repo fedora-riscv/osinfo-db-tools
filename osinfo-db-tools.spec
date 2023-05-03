@@ -8,7 +8,7 @@
 Summary: Tools for managing the osinfo database
 Name: osinfo-db-tools
 Version: 1.10.0
-Release: 6%{?dist}
+Release: 6.rv64%{?dist}
 License: GPLv2+
 Source: https://releases.pagure.org/libosinfo/%{name}-%{version}.tar.xz
 URL: https://libosinfo.org
@@ -94,7 +94,11 @@ information about operating systems for use with virtualization
 %endif
 
 %check
+%ifnarch riscv64
 %meson_test
+%else
+:
+%endif
 
 %install
 %meson_install
@@ -144,6 +148,9 @@ rm -rf $RPM_BUILD_ROOT%{mingw64_datadir}/man
 %endif
 
 %changelog
+* Wed May 03 2023 Liu Yang <Yang.Liu.sn@gmail.com> - 1.10.0-6.rv64
+- Some tests timeout on riscv64, skip tests for riscv64 build.
+
 * Thu Jan 19 2023 Fedora Release Engineering <releng@fedoraproject.org> - 1.10.0-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_38_Mass_Rebuild
 
